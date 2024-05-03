@@ -1,0 +1,4 @@
+C_STD=C11
+
+SOURCES = tg_ext.c tg_interface.c tg_altrep.c tg_exports.c
+OBJECTS = $(SOURCES:.c=.o)

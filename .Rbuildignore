@@ -1,0 +1,6 @@
+^LICENSE\.md$
+^README\.Rmd$
+^NOTES\.md$
+^\.lintr$
+^compile\_flags\.txt$
+^scripts
