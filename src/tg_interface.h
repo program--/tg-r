@@ -13,5 +13,6 @@ SEXP            tg_R_read_wkt(SEXP str);
 SEXP            tg_R_read_geojson(SEXP str);
 SEXP            tg_R_as_wkt(SEXP xp);
 SEXP            tg_R_typeof(SEXP xp);
+SEXP            tg_R_bbox(SEXP xp);
 
-SEXP tg_R_collection_to_list(SEXP xp);
+SEXP tg_R_Elt(SEXP xp, SEXP index);

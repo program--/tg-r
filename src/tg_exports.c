@@ -18,8 +18,9 @@ static const R_CallMethodDef CallEntries[] = {
     R_METHOD_DEF(tg_R_read_geojson, 1),
     R_METHOD_DEF(tg_R_as_wkt, 1),
     R_METHOD_DEF(tg_R_typeof, 1),
-    R_METHOD_DEF(tg_R_collection_to_list, 1),
     R_METHOD_DEF(tg_R_make_tgc, 1),
+    R_METHOD_DEF(tg_R_Elt, 2),
+    R_METHOD_DEF(tg_R_bbox, 1),
     R_METHOD_DEF_END
 };
 

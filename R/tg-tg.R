@@ -32,9 +32,40 @@ as_tg.tg <- function(x, ...) {
     x
 }
 
+#' @rdname as_tg
+#' @export
+as_tg.tgc <- function(x, ...) {
+    class(x) <- c("tg_geometrycollection", "tg")
+    x
+}
+
+#' @export
+`[.tg` <- function(x, i) {
+    # Pass (i - 1L) due to C indexing
+    .Call(`tg_R_Elt`, x, as.integer(i - 1L))
+}
+
+#' @export
+`[[.tg` <- function(x, i) {
+    x[i]
+}
+
+#' @method format tg
+#' @export
+format.tg <- function(x, ...) {
+    format(tg_as_wkt(x), ...)
+}
+
+#' @method as.character tg
+#' @export
+as.character.tg <- function(x, ...) {
+    format(x, ...)
+}
+
+#' @method print tg
 #' @export
 print.tg <- function(x, ...) {
-    message(tg_as_wkt(x))
+    message(format(x, ...))
     invisible(x)
 }
 

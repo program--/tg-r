@@ -2,6 +2,7 @@
 
 /* base implementation */
 #include "tg.c"
+#include "tg.h"
 
 /* extended implementation */
 struct tg_geom** tg_ext_geom_geometry_data(const struct tg_geom* geom)

@@ -25,5 +25,6 @@ extern R_altrep_class_t tgc_class;
 #endif
 
 void InitTGCollectionClass(DllInfo* dll);
-
 SEXP tg_R_make_tgc(SEXP collection);
+
+

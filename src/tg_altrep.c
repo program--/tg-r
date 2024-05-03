@@ -91,7 +91,5 @@ SEXP tg_R_make_tgc(SEXP collection)
         return R_NilValue;
     }
 
-    SEXP geom_clone = tg_to_sexp(tg_geom_clone(geom));
-    R_altrep_class_t cls = tgc_class;
-    return R_new_altrep(cls, geom_clone, R_NilValue);
+    return R_new_altrep(tgc_class, tg_to_sexp(tg_geom_clone(geom)), R_NilValue);
 }
