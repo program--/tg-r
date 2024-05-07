@@ -68,6 +68,22 @@ gjson <- '
   }
 '
 
-tg::as_tg(gjson)
+tg_geometry <- tg::as_tg(gjson)
+tg_geometry
 #> GEOMETRYCOLLECTION(POINT(102 0.5),LINESTRING(102 0,103 1,104 0,105 1),POLYGON((100 0,101 0,101 1,100 1,100 0)))
+
+# Converting to a TG Collection
+collection <- tg::as_tgc(tg_geometry)
+collection
+#> <tg collection, bounds: (100 0, 105 1)>
+#> POINT(102 0.5) 
+#> LINESTRING(102 0,103 1,104 0,105 1) 
+#> POLYGON((100 0,101 0,101 1,100 1,100 0))
+
+# Creating a data.frame
+data.frame(x = 1:3, geometry = collection)
+#>   x                                 geometry
+#> 1 1                           POINT(102 0.5)
+#> 2 2      LINESTRING(102 0,103 1,104 0,105 1)
+#> 3 3 POLYGON((100 0,101 0,101 1,100 1,100 0))
 ```

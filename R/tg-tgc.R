@@ -54,18 +54,19 @@ as.data.frame.tgc <- function(x, ..., optional = FALSE) {
     if (!optional) {
         NextMethod()
     } else {
-        structure(x, row.names = c(NA, length(x)), class = "data.frame")
+        structure(list(x), row.names = c(NA, length(x)), class = "data.frame")
     }
-}
-
-#' @export
-`[.tgc` <- function(x, i) {
-    x[[i]]
 }
 
 #' @method format tgc
 #' @export
-format.tgc <- function(x, ..., header_only = TRUE) {
+format.tgc <- function(x, ...) {
+    vapply(x, format, FUN.VALUE = character(1), ..., USE.NAMES = FALSE)
+}
+
+#' @method print tgc
+#' @export
+print.tgc <- function(x, ...) {
     bb <- tg_bbox(x)
     header <- paste0(
         "<tg collection, bounds: (",
@@ -75,24 +76,32 @@ format.tgc <- function(x, ..., header_only = TRUE) {
         format(bb[4]), ")>"
     )
 
-    if (header_only) {
-        return(header)
-    }
-
-    strs <- paste(
-        vapply(x, format, FUN.VALUE = character(1), ..., USE.NAMES = FALSE),
-        collapse = " "
-    )
-
-    paste(header, strs, sep = "\n", collapse = "\n")
-}
-
-#' @method print tgc
-#' @export
-print.tgc <- function(x, ...) {
-    cat(format(x, ..., header_only = TRUE), "\n", sep = "")
+    cat(header, sep = "\n")
     for (g in x) {
         cat(format(g, ...), "\n")
     }
     invisible(x)
+}
+
+#' pulled from geos::str.geos_geometry
+#' @method str tgc
+#' @export
+str.tgc <- function(object, ..., indent.str = "", width = getOption("width")) {
+    if (length(object) == 0) {
+        cat(paste0(" ", class(object)[1], "[0]\n"))
+        return(invisible(object))
+    }
+
+    width     <- width - nchar(indent.str) - 2
+    length    <- min(length(object), ceiling(width / 5))
+    formatted <- sapply(object[seq_len(length)], format, trim = TRUE)
+
+    title <- paste0(" ", class(object)[1], "[1:", length(object), "]")
+    cat(paste0(
+        title,
+        " ",
+        strtrim(paste0(formatted, collapse = ", "), width - nchar(title)),
+        "\n"
+    ))
+    invisible(object)
 }

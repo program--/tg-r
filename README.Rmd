@@ -76,5 +76,13 @@ gjson <- '
   }
 '
 
-tg::as_tg(gjson)
+tg_geometry <- tg::as_tg(gjson)
+tg_geometry
+
+# Converting to a TG Collection
+collection <- tg::as_tgc(tg_geometry)
+collection
+
+# Creating a data.frame
+data.frame(x = 1:3, geometry = collection)
 ```
